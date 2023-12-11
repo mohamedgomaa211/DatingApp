@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bootswatch": "^5.3.2",
+    "ngx-toastr": "^18.0.0"
+  }
+}
