@@ -1,34 +1,55 @@
 ﻿using API.Data;
+using API.Dtos;
 using API.Entities;
+using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
 
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _Context;
+        IUserRepository _userRepository;
 
-        public UsersController(DataContext Context)
+        private readonly IMapper _mapper;
+
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            _Context = Context;
+            _userRepository = userRepository;
+            _mapper = mapper;
         }
         [HttpGet]
-        public async Task <ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        {
+            var users = await _userRepository.GetMembersAsync();
+
+            return Ok(users);
+
+
+        }
+        [HttpGet("{username}")]
+
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
 
-                var users = await _Context.Users.ToListAsync();
-                return users;
-        }
-        [HttpGet("{id}")]
+            return await _userRepository.GetMemberAsync(username);
 
-        public async Task <ActionResult<AppUser>> GetById(int id)
+        }
+        [HttpPut]
+       public async Task<ActionResult> UpdateUser(UpdateUserDto updateUser)
+
         {
+            var userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user= await _userRepository.GetUserByUserName(userName);
+            if (user == null)  return NotFound();
 
-            var user = await _Context.Users.FindAsync(id);
-            return user;
-        }
+            _mapper.Map(updateUser, user);
+            if(await _userRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to update user");
+       }
     }
 }

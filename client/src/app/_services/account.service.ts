@@ -4,6 +4,7 @@ import { User } from '../_models/User';
 import { BehaviorSubject} from 'rxjs';
 
 import { map } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class AccountService {
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
-  baseUrl='http://localhost:5139/api/'
+  baseUrl=environment.apiUrl;
 
   constructor(private http:HttpClient) {
 

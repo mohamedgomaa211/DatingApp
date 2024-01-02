@@ -13,5 +13,15 @@ namespace API.Data
         {
         }
         public DbSet<AppUser> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Add the migration code here
+            modelBuilder.Entity<Photo>()
+                .Property(p => p.PublicId)
+                .HasDefaultValue("default");
+        }
+
     }
 }
