@@ -21,6 +21,17 @@ namespace API.Data
             modelBuilder.Entity<Photo>()
                 .Property(p => p.PublicId)
                 .HasDefaultValue("default");
+            modelBuilder.Entity<AppUser>()
+              .Property(u => u.Interests)
+              .IsRequired(false); 
+            modelBuilder.Entity<AppUser>()
+               .Property(u => u.Introduction)
+               .IsRequired(false);
+            modelBuilder.Entity<AppUser>()
+          .Property(u => u.LookingFor)
+          .IsRequired(false);
+
+
         }
 
     }

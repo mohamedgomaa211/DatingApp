@@ -1,5 +1,6 @@
 ﻿using API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Converters;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -14,7 +15,7 @@ namespace API.Data
 
             var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            JsonSerializerOptions? options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 

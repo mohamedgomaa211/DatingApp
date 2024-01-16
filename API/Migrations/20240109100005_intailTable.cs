@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class editcoulmnname : Migration
+    public partial class intailTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,14 +20,14 @@ namespace API.Migrations
                     UserName = table.Column<string>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "BLOB", nullable: false),
                     PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: false),
-                    DateOfBirth = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    BirthOfDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     KnownAs = table.Column<string>(type: "TEXT", nullable: false),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false),
                     LastActive = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Gender = table.Column<string>(type: "TEXT", nullable: false),
-                    Introduction = table.Column<string>(type: "TEXT", nullable: false),
-                    LookingFor = table.Column<string>(type: "TEXT", nullable: false),
-                    Interests = table.Column<string>(type: "TEXT", nullable: false),
+                    Introduction = table.Column<string>(type: "TEXT", nullable: true),
+                    LookingFor = table.Column<string>(type: "TEXT", nullable: true),
+                    Interests = table.Column<string>(type: "TEXT", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     Country = table.Column<string>(type: "TEXT", nullable: false)
                 },

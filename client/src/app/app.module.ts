@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -24,6 +24,18 @@ import { CommonModule } from '@angular/common';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptor/loading.interceptor';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DataPickerComponent } from './_forms/data-picker/data-picker.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from "ngx-timeago";
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +50,9 @@ import { LoadingInterceptor } from './_interceptor/loading.interceptor';
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
+    PhotoEditorComponent,
+    TextInputComponent,
+    DataPickerComponent,
     
   ],
   imports: [
@@ -45,16 +60,23 @@ import { LoadingInterceptor } from './_interceptor/loading.interceptor';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     NgxSpinnerModule.forRoot({
       type:'line-scale-party'
     }),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    ButtonsModule.forRoot(),
+    FileUploadModule,
     ToastrModule.forRoot({
       positionClass:'toast-bottom-right'
     }),
+    TimeagoModule.forRoot(),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot()
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
